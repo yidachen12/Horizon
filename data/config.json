@@ -105,27 +105,10 @@
       }
     ],
     "reddit": {
-      "enabled": true,
-      "subreddits": [
-        {
-          "subreddit": "gameaudio",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 20,
-          "min_score": 5
-        },
-        {
-          "subreddit": "wwise",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 3
-        }
-      ],
+      "enabled": false,
+      "subreddits": [],
       "users": [],
-      "fetch_comments": 5
+      "fetch_comments": 0
     },
     "telegram": {
       "enabled": false,

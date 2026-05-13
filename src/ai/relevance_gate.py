@@ -53,10 +53,10 @@ class RelevanceGate:
 
     def _build_prompt(self, item: ContentItem) -> str:
         title = (item.title or "").strip()
-        summary = (item.summary or "")[:400].strip() if item.summary else ""
-        source = getattr(item, "source", "") or ""
+        body = (item.content or "")[:400].strip() if item.content else ""
+        source = item.source_type.value if item.source_type else ""
         prompt = _PROMPT_TEMPLATE.format(
-            topic=self.topic, title=title, summary=summary, source=source
+            topic=self.topic, title=title, summary=body, source=source
         )
         if "game audio" in self.topic.lower() or "游戏音" in self.topic:
             prompt += "\n\n" + _GAME_AUDIO_HINT
