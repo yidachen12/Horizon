@@ -187,11 +187,25 @@ class EmailConfig(BaseModel):
     enabled: bool = False
 
 
+class RelevanceGateConfig(BaseModel):
+    """Topic-relevance pre-filter applied between fetch and AI scoring.
+
+    When enabled, every fetched item is scored on a single user-defined topic
+    (e.g. game audio) using the configured AI client; items below `threshold`
+    are dropped before the expensive analysis step.
+    """
+
+    enabled: bool = False
+    threshold: float = 5.0
+    topic: str = ""
+
+
 class FilteringConfig(BaseModel):
     """Content filtering configuration."""
 
     ai_score_threshold: float = 7.0
     time_window_hours: int = 24
+    relevance_gate: Optional[RelevanceGateConfig] = None
 
 
 class Config(BaseModel):

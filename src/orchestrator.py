@@ -20,6 +20,7 @@ from .scrapers.telegram import TelegramScraper
 from .scrapers.twitter import TwitterScraper
 from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
+from .ai.relevance_gate import RelevanceGate
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
 from .ai.tokens import get_usage_snapshot
@@ -82,6 +83,17 @@ class HorizonOrchestrator:
                 self.console.print(
                     f"🔗 Merged {len(all_items) - len(merged_items)} cross-source duplicates "
                     f"→ {len(merged_items)} unique items\n"
+                )
+
+            # 3.5 Topic-relevance gate (optional pre-filter before AI scoring)
+            gate_cfg = self.config.filtering.relevance_gate
+            if gate_cfg and gate_cfg.enabled:
+                gate = RelevanceGate(create_ai_client(self.config.ai), gate_cfg)
+                before = len(merged_items)
+                merged_items = await gate.filter(merged_items)
+                self.console.print(
+                    f"🎯 Relevance gate ({gate_cfg.topic}): {before} → {len(merged_items)} "
+                    f"items (threshold {gate_cfg.threshold})\n"
                 )
 
             # 4. Analyze with AI

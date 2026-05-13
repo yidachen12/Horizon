@@ -1,119 +1,155 @@
 {
   "version": "1.0",
   "ai": {
-    "provider": "deepseek",
-    "model": "deepseek-v4-flash",
-    "base_url": "https://api.deepseek.com",
-    "api_key_env": "OPENAI_API_KEY",
+    "provider": "openai",
+    "model": "claude-sonnet-4-6",
+    "base_url": "https://llm-proxy.lilithgames.com/v1",
+    "api_key_env": "LILITH_LLM_KEY",
     "temperature": 0.3,
-    "max_tokens": 8192,
-    "languages": [
-      "zh",
-      "en"
-    ],
-    "analysis_concurrency": 5,
-    "enrichment_concurrency": 5
+    "max_tokens": 4096,
+    "languages": ["zh"],
+    "analysis_concurrency": 3,
+    "enrichment_concurrency": 3
   },
   "sources": {
-    "github": [
-      {
-        "type": "user_events",
-        "username": "karpathy",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "vllm-project",
-        "repo": "vllm",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "sgl-project",
-        "repo": "sglang",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "triton-lang",
-        "repo": "triton",
-        "enabled": true
-      }
-    ],
+    "github": [],
     "hackernews": {
-      "enabled": true,
-      "fetch_top_stories": 30,
-      "min_score": 150
+      "enabled": false,
+      "fetch_top_stories": 0,
+      "min_score": 0
     },
     "rss": [
       {
-        "name": "Simon Willison",
-        "url": "https://simonwillison.net/atom/everything/",
+        "name": "A Sound Effect",
+        "url": "https://feeds.feedburner.com/ASoundEffect",
         "enabled": true,
-        "category": "ai-tools"
+        "category": "game-audio"
       },
       {
-        "name": "GitHub Trending - Daily",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+        "name": "Pro Sound Effects Blog",
+        "url": "https://blog.prosoundeffects.com/rss.xml",
         "enabled": true,
-        "category": "github-trending"
+        "category": "game-audio"
       },
       {
-        "name": "LWN.net",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
+        "name": "Audiokinetic (Wwise) YT",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuv_-Z-CrnYup-N_dVpdCYg",
         "enabled": true,
-        "category": "linux-kernel"
+        "category": "middleware"
+      },
+      {
+        "name": "FMODTV",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCekk9jO-MTyWEbD2l0m6PTA",
+        "enabled": true,
+        "category": "middleware"
+      },
+      {
+        "name": "Audio Logs",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCqdVQ6YH_8DCNPSBOCO2WZg",
+        "enabled": true,
+        "category": "interview"
+      },
+      {
+        "name": "Akash Thakkar",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCr1pdADQRWMks2checkZxBA",
+        "enabled": true,
+        "category": "education"
+      },
+      {
+        "name": "Marshall McGee",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCIoNgwHpavUi2UnC68cKgbw",
+        "enabled": true,
+        "category": "sound-design"
+      },
+      {
+        "name": "The Audio Programmer",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCpKb02FsH4WH4X_2xhIoJ1A",
+        "enabled": true,
+        "category": "audio-programming"
+      },
+      {
+        "name": "Sergio Ronchetti",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCYdqizROsbW1VB502p-k7_g",
+        "enabled": true,
+        "category": "education"
+      },
+      {
+        "name": "A Sound Effect YT",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC4g-tOQTJIFkwMPUzHysYbQ",
+        "enabled": true,
+        "category": "game-audio"
+      },
+      {
+        "name": "GDC",
+        "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC0JB7TSe49lg56u6qH8y_MQ",
+        "enabled": true,
+        "category": "conference-broad"
+      },
+      {
+        "name": "Game Developer",
+        "url": "https://www.gamedeveloper.com/rss.xml",
+        "enabled": true,
+        "category": "industry-broad"
+      },
+      {
+        "name": "GamesIndustry.biz",
+        "url": "https://www.gamesindustry.biz/feed",
+        "enabled": true,
+        "category": "industry-broad"
+      },
+      {
+        "name": "80 Level",
+        "url": "https://80.lv/feed/",
+        "enabled": true,
+        "category": "industry-broad"
       }
     ],
     "reddit": {
       "enabled": true,
       "subreddits": [
         {
-          "subreddit": "MachineLearning",
+          "subreddit": "gameaudio",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 15,
-          "min_score": 60
+          "fetch_limit": 20,
+          "min_score": 5
         },
         {
-          "subreddit": "LocalLLaMA",
+          "subreddit": "wwise",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 15,
-          "min_score": 60
+          "fetch_limit": 10,
+          "min_score": 3
         }
       ],
       "users": [],
-      "fetch_comments": 10
+      "fetch_comments": 5
     },
     "telegram": {
-      "enabled": true,
-      "channels": [
-        {
-          "channel": "zaihuapd",
-          "enabled": true,
-          "fetch_limit": 20
-        }
-      ]
+      "enabled": false,
+      "channels": []
     }
   },
   "filtering": {
-    "ai_score_threshold": 8.0,
-    "time_window_hours": 24
+    "ai_score_threshold": 6.5,
+    "time_window_hours": 24,
+    "relevance_gate": {
+      "enabled": true,
+      "threshold": 5.0,
+      "topic": "game audio (游戏音效)"
+    }
   },
   "webhook": {
     "enabled": true,
     "url_env": "HORIZON_WEBHOOK_URL",
     "delivery": "summary_and_items",
-    "overview_position": "last",
+    "overview_position": "first",
     "platform": "feishu",
     "layout": "collapsible",
     "fallback_layout": "markdown",
-    "languages": [
-      "zh"
-    ],
+    "languages": ["zh"],
     "request_body": {
       "msg_type": "interactive",
       "card": {
@@ -124,7 +160,7 @@
         "header": {
           "title": {
             "tag": "plain_text",
-            "content": "#{message_title}"
+            "content": "🎮🔊 游戏音效早报 | #{message_title}"
           },
           "template": "blue"
         },
