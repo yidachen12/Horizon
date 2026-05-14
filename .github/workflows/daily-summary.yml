@@ -38,7 +38,7 @@ jobs:
         run: uv run horizon --hours 24
 
       - name: Set current date as environment variable
-        shell: pwsh
+        shell: powershell
         run: |
           $date = Get-Date -Format 'yyyy-MM-dd'
           "DATE=$date" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
