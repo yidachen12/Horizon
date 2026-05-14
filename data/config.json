@@ -116,7 +116,7 @@
     }
   },
   "filtering": {
-    "ai_score_threshold": 6.5,
+    "ai_score_threshold": 4.0,
     "time_window_hours": 24,
     "relevance_gate": {
       "enabled": true,
