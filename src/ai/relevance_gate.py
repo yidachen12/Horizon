@@ -91,7 +91,11 @@ class RelevanceGate:
         kept: List[ContentItem] = []
         for item, score in zip(items, scores):
             # Stash the score so it shows up in logs / debug dumps.
-            setattr(item, "relevance_score", score)
+            # ContentItem is a strict pydantic model — pin into metadata dict.
+            try:
+                item.metadata["relevance_score"] = score
+            except Exception:
+                pass
             if score >= self.threshold:
                 kept.append(item)
         return kept

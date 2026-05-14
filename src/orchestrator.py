@@ -246,7 +246,15 @@ class HorizonOrchestrator:
         Returns:
             List[ContentItem]: All fetched items
         """
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(
+            timeout=30.0,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                              "AppleWebKit/537.36 (KHTML, like Gecko) "
+                              "Chrome/120.0.0.0 Safari/537.36",
+            },
+            follow_redirects=True,
+        ) as client:
             tasks = []
 
             # GitHub sources
@@ -484,7 +492,15 @@ class HorizonOrchestrator:
             f"💬 Fetching reply text for {len(twitter_items)} Twitter items..."
         )
 
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient(
+            timeout=30.0,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                              "AppleWebKit/537.36 (KHTML, like Gecko) "
+                              "Chrome/120.0.0.0 Safari/537.36",
+            },
+            follow_redirects=True,
+        ) as client:
             scraper = TwitterScraper(tw_cfg, client)
             expanded = []
             for item in twitter_items:
