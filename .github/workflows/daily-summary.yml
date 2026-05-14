@@ -8,7 +8,7 @@ on:
 
 jobs:
   daily-summary:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, X64]
     permissions:
       contents: write  # Needed to commit changes
 
@@ -36,7 +36,10 @@ jobs:
         run: uv run horizon --hours 24
 
       - name: Set current date as environment variable
-        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        shell: pwsh
+        run: |
+          $date = Get-Date -Format 'yyyy-MM-dd'
+          "DATE=$date" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
