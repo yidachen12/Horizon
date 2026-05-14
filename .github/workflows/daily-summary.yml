@@ -25,6 +25,20 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
+      - name: Debug YouTube reachability from runner
+        shell: powershell
+        run: |
+          $url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCuv_-Z-CrnYup-N_dVpdCYg"
+          try {
+            $r = Invoke-WebRequest -Uri $url -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36" -TimeoutSec 15
+            "PowerShell IWR status: $($r.StatusCode), bytes: $($r.RawContentLength)"
+          } catch {
+            "PowerShell IWR error: $($_.Exception.Message)"
+          }
+          curl.exe -sS -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36" -o NUL -w "curl HTTP %`{http_code`} `n" $url
+          whoami
+          ipconfig /all | findstr /R "IPv4 DNS"
+
       - name: Run Horizon
         env:
           # Lilith internal LLM proxy (OpenAI-compatible) — see data/config.json

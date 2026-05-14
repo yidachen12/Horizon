@@ -319,6 +319,28 @@ class WebhookNotifier:
             "Expand the panels below to read the full briefing inside Feishu/Lark."
         )
 
+    def _resolve_collapsible_title(self, date: str, lang: str) -> str:
+        """Pick the card header title for collapsible mode.
+
+        If the user supplied a custom header title template in
+        webhook.request_body.card.header.title.content, use that (with
+        #{date} substituted) so branded titles like "🎮🔊 游戏音效早报
+        - 2026-05-14" still apply even though the collapsible builder
+        otherwise discards the request_body template.
+        """
+        try:
+            template = (
+                self.config.request_body["card"]["header"]["title"]["content"]
+            )
+        except (KeyError, TypeError):
+            template = None
+        if template and isinstance(template, str) and template.strip():
+            return _render(template, {"date": date, "message_title": date})
+        return (
+            f"Horizon {date} 折叠日报" if lang == "zh"
+            else f"Horizon {date} Collapsible Daily"
+        )
+
     def _build_feishu_collapsible_body(
         self,
         important_items: List[ContentItem],
@@ -362,10 +384,7 @@ class WebhookNotifier:
                 "header": {
                     "title": {
                         "tag": "plain_text",
-                        "content": (
-                            f"Horizon {date} 折叠日报" if lang == "zh"
-                            else f"Horizon {date} Collapsible Daily"
-                        ),
+                        "content": self._resolve_collapsible_title(date, lang),
                     },
                     "template": "blue",
                 },

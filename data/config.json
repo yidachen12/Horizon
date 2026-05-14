@@ -143,7 +143,7 @@
         "header": {
           "title": {
             "tag": "plain_text",
-            "content": "🎮🔊 游戏音效早报 | #{message_title}"
+            "content": "🎮🔊 游戏音效早报 - #{date}"
           },
           "template": "blue"
         },
