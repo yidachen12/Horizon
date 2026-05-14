@@ -54,7 +54,7 @@ jobs:
           # Windows is GBK and rich emojis (🌅 ❌ etc.) crash with
           # UnicodeEncodeError.
           PYTHONIOENCODING: "utf-8"
-        run: uv run horizon --hours 168
+        run: uv run horizon --hours 24
 
       - name: Set current date as environment variable
         shell: powershell

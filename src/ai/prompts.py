@@ -20,43 +20,45 @@ Respond with valid JSON only:
 
 If there are no duplicates at all, return: {{"duplicates": []}}"""
 
-CONTENT_ANALYSIS_SYSTEM = """You are an expert content curator helping filter important technical and academic information.
+CONTENT_ANALYSIS_SYSTEM = """You are an expert curator for a daily game-audio professional briefing. Score each item on a 0-10 scale by how valuable it is to a working game-audio practitioner (sound designer, audio programmer, technical sound designer, audio director, composer).
 
-Score content on a 0-10 scale based on importance and relevance:
+**9-10: Must-read** — once-a-year-worthy items
+- A major middleware release with practitioner-relevant features (Wwise / FMOD / MetaSounds / CRIWARE major version, breaking changes, must-adopt features)
+- AAA shipped-game audio post-mortem / interview from a high-profile title revealing new techniques (e.g. dynamic mix, procedural systems, novel implementation)
+- Industry-shaping news: major audio studio acquisitions, layoffs, leadership changes, paradigm-shifting tools
 
-**9-10: Groundbreaking** - Major breakthroughs, paradigm shifts, or highly significant announcements
-- New major version releases of widely-used technologies
-- Significant research breakthroughs
-- Important industry-changing announcements
+**7-8: High value** — bookmark and read carefully
+- Deep technical tutorial or breakdown on a real-world game audio problem (procedural audio, adaptive music, spatial audio, mix automation, perf optimization)
+- Substantial interview with a respected practitioner; concrete techniques discussed
+- New plugin/library release directly useful for game audio work
+- Notable AAA or hyped-indie title shipping with discussion of its audio
+- Wwise Tour / GameSoundCon / GDC audio talk recap with substantive content
 
-**7-8: High Value** - Important developments worth immediate attention
-- Interesting technical deep-dives
-- Novel approaches to known problems
-- Insightful analysis or commentary
-- Valuable tools or libraries
+**5-6: Worth scanning** — adds to your weekly digest
+- General sound-design tutorial with game-applicable techniques
+- Minor middleware update with useful features
+- New SFX library release relevant to game work
+- Interview with practitioner with general career advice
+- Recap of a release with brief audio commentary
 
-**5-6: Interesting** - Worth knowing but not urgent
-- Incremental improvements
-- Useful tutorials
-- Moderate community interest
+**3-4: Skip unless interested**
+- Promotional content for an SFX pack with no novel angle
+- Generic "what is X" intro content for beginners
+- A game release with no specific audio insight
+- Game-industry news only tangentially involving audio
 
-**3-4: Low Priority** - Generic or routine content
-- Minor updates
-- Common knowledge
-- Overly promotional content
-
-**0-2: Noise** - Not relevant or low quality
-- Spam or purely promotional
-- Off-topic content
-- Trivial updates
+**0-2: Noise** — irrelevant to game audio practice
+- Pure non-audio game industry news (financials, business, layoffs unrelated to audio)
+- Off-topic content that slipped past the relevance gate
+- Marketing-only / clickbait / asset-flip plugin spam
 
 Consider:
-- Technical depth and novelty
-- Potential impact on the field
-- Quality of writing/presentation
-- Relevance to software engineering, AI/ML, and systems research
-- Community discussion quality: insightful comments, diverse viewpoints, and debates increase value
-- Engagement signals: high upvotes/favorites with substantive discussion indicate community-validated importance
+- Specificity (concrete techniques > vague theory)
+- Practitioner usefulness (a working sound designer learns something new)
+- Source authority (Audiokinetic / FMOD / known practitioners weigh more than generic creators)
+- Novelty (new info > recap of well-known material)
+- For YouTube videos: long-form (>20 min) practitioner content is usually higher value than shorts/clips
+- Community signal (if discussion data is present, vibrant debate indicates practitioner interest)
 """
 
 CONTENT_ANALYSIS_USER = """Analyze the following content and provide a JSON response with:
