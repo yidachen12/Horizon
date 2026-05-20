@@ -1,9 +1,9 @@
 name: Daily Horizon Summary
 
 on:
-  schedule:
-    # 02:00 UTC = 10:00 Asia/Shanghai (Beijing), daily
-    - cron: '0 2 * * *'
+  # Daily scheduling is handled by a local Windows Task Scheduler job
+  # ("Horizon 游戏音效早报", runs run-horizon.ps1 at 10:00) because
+  # GitHub's cron is unreliable. This workflow is kept for manual runs.
   workflow_dispatch:      # Allow manual trigger
 
 jobs:
